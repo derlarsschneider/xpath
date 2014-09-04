@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+	<book>
+		<title lang="en">Harry Potter</title>
+		<price>29.99</price>
+	</book>
+	<book cover='hard'>
+		<title lang="en">Learning XML</title>
+		<price>39.95</price>
+	</book>
+	<book cover='soft'>
+		<title lang="de">Per Anhalter durch die Galaxis</title>
+		<price>42.00</price>
+	</book>
+</bookstore>

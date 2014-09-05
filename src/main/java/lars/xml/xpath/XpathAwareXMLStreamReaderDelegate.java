@@ -141,7 +141,7 @@ public class XpathAwareXMLStreamReaderDelegate implements XMLStreamReader {
 				}
 				if (this.isEndElement()) {
 					depth--;
-					System.out.println("</" + this.getLocalName() + ">");
+					System.out.print("</" + this.getLocalName() + ">");
 				}
 				this.next();
 			} while (depth > 0);

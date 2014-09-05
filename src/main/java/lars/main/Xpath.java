@@ -48,8 +48,8 @@ public class Xpath {
 						reader.reset();
 						int count = reader.count();
 						System.out.println("Found " + count + " match"
-								+ (count == 1 ? "" : "es") + " for " + xpath
-								+ ".");
+								+ (count == 1 ? "" : "es") + " for '" + xpath
+								+ "'.");
 					}
 					if (options.contains(PRINT_OPTION)) {
 						reader.reset();

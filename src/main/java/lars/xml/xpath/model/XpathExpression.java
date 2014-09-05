@@ -47,14 +47,14 @@ public class XpathExpression {
 		return elements.get(i);
 	}
 
-	public boolean matches(XpathExpression xpathStack) {
-		if (this.size() != xpathStack.size()) {
+	public boolean isMatchedBy(XpathExpression wildcardXpath) {
+		if (this.size() != wildcardXpath.size()) {
 			return false;
 		}
 		for (int i = 0; i < this.size(); i++) {
-			XpathElement xpathStackElement = xpathStack.get(i);
-			XpathElement dynElement = this.get(i);
-			if (!dynElement.matches(xpathStackElement)) {
+			XpathElement pathElement = this.get(i);
+			XpathElement wildcardXpathElement = wildcardXpath.get(i);
+			if (!pathElement.isMatchedBy(wildcardXpathElement)) {
 				return false;
 			}
 		}
@@ -69,4 +69,5 @@ public class XpathExpression {
 	public XpathElement getLeafElement() {
 		return elements.get(elements.size() - 1);
 	}
+
 }

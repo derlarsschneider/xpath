@@ -12,6 +12,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import lars.xml.xpath.model.AttributePredicate;
 import lars.xml.xpath.model.InvalidXpathException;
 import lars.xml.xpath.model.XpathElement;
 import lars.xml.xpath.model.XpathExpression;
@@ -48,8 +49,10 @@ public class XpathAwareXMLStreamReaderDelegate implements XMLStreamReader {
 			try {
 				XpathElement element = new XpathElement(this.getLocalName());
 				for (int i = 0; i < this.getAttributeCount(); i++) {
-					element.addPredicate(this.getAttributeName(i)
-							.getLocalPart(), this.getAttributeValue(i));
+					element.addPredicate(AttributePredicate
+							.createEqualsAttributePredicate(this
+									.getAttributeName(i).getLocalPart(), this
+									.getAttributeValue(i)));
 				}
 				xpathStack.push(element);
 			} catch (InvalidXpathException e) {
@@ -76,7 +79,9 @@ public class XpathAwareXMLStreamReaderDelegate implements XMLStreamReader {
 	}
 
 	private boolean xpathMatches() {
-		return this.isStartElement() && xpathExpression.matches(xpathStack);
+		// return this.isStartElement() && xpathExpression.matches(xpathStack);
+		return this.isStartElement() && xpathStack.isMatchedBy(xpathExpression);
+
 	}
 
 	public int count() throws XMLStreamException {

@@ -12,6 +12,7 @@ import javax.xml.stream.FactoryConfigurationError;
 import javax.xml.stream.XMLStreamException;
 
 import lars.string.StringMatcher;
+import lars.xml.xpath.model.AttributePredicate;
 import lars.xml.xpath.model.InvalidXpathException;
 import lars.xml.xpath.model.XpathElement;
 import lars.xml.xpath.model.XpathExpression;
@@ -69,21 +70,21 @@ public class XpathAwareXMLStreamReaderDelegateTest {
 			// XpathAwareXMLStreamReaderDelegate reader = new
 			// XpathAwareXMLStreamReaderDelegate(
 			// new File("src/test/resources/testAttributes.xml"));
-			System.out.println(XpathElement.PREDICATE_REGEX);
-			assertTrue("[@lang='en']".matches(XpathElement.PREDICATE_REGEX));
-			assertFalse("[@lang=en']".matches(XpathElement.PREDICATE_REGEX));
-			assertFalse("[@lang='en]".matches(XpathElement.PREDICATE_REGEX));
-			assertFalse("[@lang=en]".matches(XpathElement.PREDICATE_REGEX));
-			assertTrue("[@lang]".matches(XpathElement.PREDICATE_REGEX));
+			System.out.println(AttributePredicate.PATTERN);
+			assertTrue("[@lang='en']".matches(AttributePredicate.PATTERN));
+			assertFalse("[@lang=en']".matches(AttributePredicate.PATTERN));
+			assertFalse("[@lang='en]".matches(AttributePredicate.PATTERN));
+			assertFalse("[@lang=en]".matches(AttributePredicate.PATTERN));
+			assertTrue("[@lang]".matches(AttributePredicate.PATTERN));
 			XpathElement xpathElement;
 
 			xpathElement = new XpathElement("title[@lang]");
 			assertEquals("title", xpathElement.getXpath());
-			assertEquals(null, xpathElement.getPredicate("lang"));
+			assertEquals(null, xpathElement.getPredicate("lang").getValue());
 
 			xpathElement = new XpathElement("title[@lang='en']");
 			assertEquals("title", xpathElement.getXpath());
-			assertEquals("en", xpathElement.getPredicate("lang"));
+			assertEquals("en", xpathElement.getPredicate("lang").getValue());
 
 		} catch (Exception e) {
 			e.printStackTrace();
